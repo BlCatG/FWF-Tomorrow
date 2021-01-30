@@ -1,9 +1,24 @@
 import {users} from './jsonOperation.js';
+/**
+ * @module password -密码操作模块
+ */
 
-let check = (text) => {
-    //正则表达式简单的检查密码难度
-    let patternBits = /^\w{6,}$/;//少于6位数的密码不行！
-    let patternAllNumber = /^\d+$/;//全是数字的密码不行！
+
+
+
+
+
+
+/**
+ * @method check -简单的检查密码难度
+ * @param {string} text -用户输入的密码
+ * 
+ * 正则表达式
+ * 少于6位数和全是数字的不行
+ */
+ let check = (text) => {
+    let patternBits = /^\w{6,}$/;
+    let patternAllNumber = /^\d+$/;
 
     if (!patternBits.test(text)) {
         alert("密码不能少于六位");//暂定
@@ -16,10 +31,14 @@ let check = (text) => {
 }
 
 
-
+/**
+ * @method compare -验证密码
+ * @param {string} text -用户输入的密码
+ * @param {string} user -当前用户数据
+ */
 let compare = (text,user) => {
     let testText = user.password;
-    //目前仅验证第一个用户密码
+    //此为测试
 
     if (testText == text) {
         alert("密码正确")
