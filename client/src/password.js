@@ -1,6 +1,6 @@
-import {users} from './jsonOperation.js';
 /**
  * @module password -密码操作模块
+ * @author Hans
  */
 
 

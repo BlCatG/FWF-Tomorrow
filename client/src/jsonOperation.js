@@ -11,33 +11,35 @@
  */
 let load = (function() {
     let data = null;
-    let get = () => {
+    let get = (url) => {
         return new Promise((resolve,reject) => {
-            $.getJSON("../test-Hans/test.json",res => {
+            $.getJSON(url,res => {
                     data = res;
-                    resolve();
+                    resolve(data);
                 }
             );
         })
     }
-    let result = async function(method) {
+    let result = async function(method,url) {
 
-            await get();
+            await get(url);
 
             data = method(data);        
   
             return data;
     }
     return result;
-})();
+})();   
 
 
 /**
  * @method jsonX -接收json操作方法
- * @param {functoin} method -传入的json操作方法
+ * @param {function} method -传入的json操作方法
+ * @param {string} url -要get的json地址
  */
-let jsonX = (method) => {
-    load(method).then((data) => {
+let jsonX = (method,url) => {
+    load(method,url).then((data) => {
+        console.log(data);
         //上传
     })
 }
