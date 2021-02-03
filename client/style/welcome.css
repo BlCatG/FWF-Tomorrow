@@ -44,7 +44,7 @@ body{
 }
 .container__add {
     display: none;
-    height: 500px;
+    height: 600px;
 }
 /*第二行中再嵌套创建一个网格*/
 .container-form{
@@ -53,7 +53,7 @@ body{
      grid-template-columns: 150px 150px 150px;
  }
  .container-form__add{
-    grid-template-rows: repeat(5,72px);
+    grid-template-rows: repeat(6,72px);
  }
 .container-logo{
     color: white;
@@ -86,6 +86,13 @@ body{
     font-size: 25px;
     grid-area: 4/1/5/2;
     margin-top: 6px;
+    margin-left: 100px;
+}
+.container-form-emailIcon{
+    color: white;
+    font-size: 25px;
+    grid-area: 5/1/6/2;
+    margin-top: -10px;
     margin-left: 100px;
 }
 /*去掉点击输入框后出现的蓝色矩形边框*/
@@ -138,6 +145,20 @@ input{
     margin-top: 0px;
     margin-left: -21px;
 }
+.container-form-emailInput {
+    width: 190px;
+    height: 32px;
+    border-radius: 25px;
+    font-size: 14px;
+    text-indent:20px;   /*控制输入框文字到框的距离*/
+    letter-spacing: 2px;
+    border: 2px solid white;
+    BACKGROUND-COLOR: transparent;/*背景透明*/
+    color: white;
+    grid-area: 5/2/5/2;
+    margin-top: -16px;
+    margin-left: -21px;
+}
 a{
     text-decoration: none;
     color: white;
@@ -176,7 +197,7 @@ ul li{
     margin-left: -52px;
 }
 .container-form-signUpButton{
-    grid-area: 5/2/5/3;
+    grid-area: 6/2/6/3;
     margin-top: 0px;
 }
 .container-form-logInButton:hover{
@@ -187,4 +208,18 @@ ul li{
 * {
     padding :0;
     margin: 0;
+}
+
+.containerSignUp--link{
+    grid-area: 5/2/5/2;
+    justify-self: center;
+    margin-top: 25px;
+    cursor: pointer;
+    color: white;
+    font-size : 14px;
+    height:14px;
+}
+
+.containerSignUp--link:hover{
+    color: red;
 }

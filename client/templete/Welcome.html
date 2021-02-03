@@ -5,8 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FWF-Tomorrow</title>
     <link rel="stylesheet" href="../style/welcome.css"/>
-    <link rel="stylesheet" href="../style/iconfont.css">
-    <script src="../test-Hans/jquery-3.5.1.js"></script>
+    <link rel="stylesheet" href="../style/iconfont.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js" integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ==" crossorigin="anonymous"></script>
+
 </head>
 <body>
 <div class="container">
@@ -18,7 +20,7 @@
             <input type="password" name="userPassword"  value="" placeholder="Enter Password" class="container-form-passwordInput" required>
             
             <ul class="container-form-ul">
-                <li><a href="#" id="container-form-ul-link-signUp">Sign Up </a>|</li>
+                <li><a href="#" id="link-signUp">Sign Up </a>|</li>
                 <li><a href="#">Get Back Password </a>|</li>
                 <li><a href="#">Help</a></li>
             </ul>
@@ -28,25 +30,30 @@
 </div>
 <div class="container container__add">
     <div class="container-logo" align="center"><strong>TOMORROW</strong></div>
-    <form action="#" class="container-form container-form__add">  
+    <div class="container-form container-form__add">  
         <i class="iconfont icon-wulumuqishigongandashujuguanlipingtai-ico- container-form-userIcon"></i>
-        <input type="email" name="userEmail" value="" placeholder="Enter Email" class="container-form-userInput" required>
+        <input id="input-username-signUp" type="text" name="username" value="" placeholder="Enter Username" class="container-form-userInput" required>
         <i class="iconfont icon-mima2 container-form-passwordIcon"></i>
-        <input type="password" name="userPassword"  value="" placeholder="Enter Password" class="container-form-passwordInput" required>
+        <input id="input-password-first" type="password" name="password"  value="" placeholder="Enter Password" class="container-form-passwordInput" required>
         
         <i class="iconfont icon-mima2 container-form-passwordIcon container-form-passwordIconAgain"></i>
-        <input type="password" name="userPasswordAgain"  value="" placeholder="Confirm Password" class="container-form-passwordInput container-form-passwordInputAgain" required>
+        <input id="input-password-again" type="password" name="userPasswordAgain"  value="" placeholder="Confirm Password" class="container-form-passwordInput container-form-passwordInputAgain" required>
 
         <i class="iconfont icon-yanzhengma container-form-codeIcon"></i>
-        <input type = "text" name = "userCode" value = "" placeholder="Enter Code Received" class = "container-form-codeInput" required></input>
+        <input id="input-captcha" type = "text" name = "captcha" value = "" placeholder="Enter Code Received" class = "container-form-codeInput" required></input>
+        
+        <i class="iconfont icon-youxiang container-form-emailIcon"></i>
+        <input id="input-email-signUp" type="email" name="email" value="" placeholder="Enter Email" class="container-form-emailInput" required>
+        
+        <div id="link-sendCode" class="containerSignUp--link">Send Code</div>
         
         <ul class="container-form-ul container-form-ul__add">
-            <li><a href="#" id="container-form-ul-link-login">Login </a>|</li>
+            <li><a href="#" id="link-login">Login </a>|</li>
             <li><a href="#">Get Back Password </a>|</li>
             <li><a href="#">Help</a></li>
         </ul>
-        <input type="submit" value="Sign Up" class="container-form-logInButton container-form-signUpButton">
-    </form>
+        <input type="button" id="button-signUp" value="Sign Up" class="container-form-logInButton container-form-signUpButton"></div>
+    </div>
     
 </div>
 <span>&times;</span><span>&times;</span><span>&times;</span>

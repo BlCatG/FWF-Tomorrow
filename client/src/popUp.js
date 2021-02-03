@@ -1,6 +1,8 @@
 /** 
  * 
- * @module popUpSystem -弹窗系统
+ * @module popUpSystem
+ * @description 弹窗系统
+ * @author 
  * 
  */
 
@@ -14,7 +16,7 @@
 /**
  * 初始化弹窗对象
  */
-    let containerPopUp =  $('<div id="reminder-strong" class="reminder--strong"></div>').html(`
+let containerPopUp =  $('<div id="reminder-strong" class="reminder--strong"></div>').html(`
     <div class="container__popUp" id="container-popUp"">
         <div class="textBox__popUp__title">
             默认标题
@@ -41,8 +43,18 @@
         });
     });
 
+/**
+ * @description dynamically link css files -动态引入css文件
+ * @author Hans
+ * 
+ */
 
-    
+let linkCss = () => {
+    $("head").append($("<link>").attr({
+        rel: "stylesheet",
+        href: "../style/popUp.css"
+    }))
+}
 /**
  * 
  * @method popUp -弹窗
@@ -51,14 +63,10 @@
  */
 
 let popUp = (title,text) => {
-
-    
+    linkCss();
     $(".textBox__popUp__title").text(title);
     $(".textBox__popUp__text").text(text);
     containerPopUp.fadeIn(300);
 
 };
-
-
-
-export {popUp};
+export { popUp };

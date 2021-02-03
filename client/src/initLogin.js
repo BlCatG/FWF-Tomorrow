@@ -1,14 +1,53 @@
 import { check,compare } from './password.js';
+import { popUp } from './popUp.js';
 
-$("#button-check").on("click" , () => {
-    check($("#password").val());
+/**
+ * @description send verification code to email -发送验证码到邮箱
+ * @author Hans
+ */
+$("#link-sendCode").on("click",() => {
+    axios.post('http://60.205.230.224:8000/api/user/email',{
+        email:$("#input-email-signUp").val()
+    })
+    .then(res => {
+        //popUp("成功","验证码发送成功");
+        console.log(res.data);
+    })
+    .catch(err => {
+        //popUp("失败","验证码发送失败");
+        console.error(err); 
+    })
 });
 
-$("#button-compare").on("click", () => {
-    compare($("#password").val());
+/**
+ * @description sign up request -发送注册请求
+ * @author Hans
+ */
+$("#button-signUp").on("click", () => {
+    if ( $("#input-password-first").val() == $("#input-password-again").val() ) {
+        axios.post('http://60.205.230.224:8000/api/user/register',{
+            email: $("#input-email-signUp").val(),
+            password: $("#input-password-again").val(),
+            username: $("#input-username-signUp").val(),
+            captcha: $("#input-captcha").val()
+        })
+        .then(res => {
+            console.log(res.data);
+        })
+        .catch(err => {
+            console.error(err); 
+        })
+    } else {
+        popUp("错误","两次密码不一致");
+    }
 });
+/**
+ * @description switch login & sign up page -登陆注册界面切换
+ * @author Hans
+ */
 
-$("#container-form-ul-link-signUp").on("click", () => {
+
+$("#link-signUp").on("click", () => {
     $(".container").css({
         "display": "none"
     });
@@ -17,7 +56,7 @@ $("#container-form-ul-link-signUp").on("click", () => {
     });
 });
 
-$("#container-form-ul-link-login").on("click", () => {
+$("#link-login").on("click", () => {
     $(".container").css({
         "display": "grid"
     });
@@ -25,4 +64,3 @@ $("#container-form-ul-link-login").on("click", () => {
         "display" : "none"
     });
 });
-
