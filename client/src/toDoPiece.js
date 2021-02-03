@@ -45,7 +45,7 @@ let add = () => {
     edit(piece);
 }
 
-let del = (piece) => {
+let del = (event,piece) => {
     let backup = piece.detach();
     console.log(backup);
 
@@ -56,6 +56,7 @@ let del = (piece) => {
             $("#pieces").append(backup);
             //这里没有考虑回到特定位置
         } else {
+            $(event.currentTarget).remove();
             //执行真正的删除，并保存
             alert("已删除");
         }

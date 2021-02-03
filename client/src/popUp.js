@@ -2,7 +2,7 @@
  * 
  * @module popUpSystem
  * @description 弹窗系统
- * @author 
+ * @author Hans
  * 
  */
 
@@ -37,7 +37,6 @@ let containerPopUp =  $('<div id="reminder-strong" class="reminder--strong"></di
 
     containerPopUp.fadeOut(0).appendTo($("body"));
 
-
     containerPopUp > $(".button__basis").on("click", function() {
         containerPopUp.fadeOut(300,() => {
         });
@@ -60,13 +59,40 @@ let linkCss = () => {
  * @method popUp -弹窗
  * @param {string} title -弹窗的标题
  * @param {string} text -弹窗的文本
+ * @author Hans
  */
 
-let popUp = (title,text) => {
+let popUp = async (title,text) => {
+    let result = null;
     linkCss();
     $(".textBox__popUp__title").text(title);
     $(".textBox__popUp__text").text(text);
     containerPopUp.fadeIn(300);
-
 };
+
+/**
+ * 
+ * @description get to know confirm or cancel -获取“确认”还是“取消”
+ * @author Hans
+ */
+TODO
+
+let result = null;
+containerPopUp > $(".button__confirm").on("click",() => {
+    return new Promise((resolve,reject) => {
+
+    })
+    .then(() => {
+        result = false;
+    });
+    return result;
+});
+
+containerPopUp > $(".button__cancel").on("click",() => {
+    result = false;
+});
+
+
+
+
 export { popUp };
