@@ -167,8 +167,8 @@ a:hover{
     color: red;
 }
 .container-form-ul__add {
-    grid-area : 5/2/5/4;
-    margin-top: 50px;
+    grid-area : 6/2/6/4;
+    margin-top: 60px;
     margin-left : -20px;
 }
 ul{

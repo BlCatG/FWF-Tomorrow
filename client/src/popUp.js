@@ -10,6 +10,7 @@
 
 
 
+let result = null;
 
 
 
@@ -35,6 +36,14 @@ let containerPopUp =  $('<div id="reminder-strong" class="reminder--strong"></di
     `);
 
 
+    containerPopUp > $(".button__confirm").on("click",() => {
+        result = true;
+    });
+    
+    containerPopUp > $(".button__cancel").on("click",() => {
+        result = false;
+    });
+
     containerPopUp.fadeOut(0).appendTo($("body"));
 
     containerPopUp > $(".button__basis").on("click", function() {
@@ -45,7 +54,7 @@ let containerPopUp =  $('<div id="reminder-strong" class="reminder--strong"></di
 /**
  * @description dynamically link css files -动态引入css文件
  * @author Hans
- * 
+ * 这里有一个bug，重复生成link标签
  */
 
 let linkCss = () => {
@@ -62,37 +71,13 @@ let linkCss = () => {
  * @author Hans
  */
 
-let popUp = async (title,text) => {
-    let result = null;
+let popUp = (title,text) => {
+
     linkCss();
     $(".textBox__popUp__title").text(title);
     $(".textBox__popUp__text").text(text);
     containerPopUp.fadeIn(300);
+    //TODO 可传入两个函数，确认时做什么，取消时做什么
+
 };
-
-/**
- * 
- * @description get to know confirm or cancel -获取“确认”还是“取消”
- * @author Hans
- */
-TODO
-
-let result = null;
-containerPopUp > $(".button__confirm").on("click",() => {
-    return new Promise((resolve,reject) => {
-
-    })
-    .then(() => {
-        result = false;
-    });
-    return result;
-});
-
-containerPopUp > $(".button__cancel").on("click",() => {
-    result = false;
-});
-
-
-
-
-export { popUp };
+export { popUp,result as popUpResult };
