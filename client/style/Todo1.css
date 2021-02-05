@@ -65,7 +65,8 @@ button{
  }
  /* 新创建的卡片的属性 */
  .Newlist{ 
-    display: block;
+    display: grid;
+    grid-template-rows: 25px auto 20px;
     width: 250px;
     min-height: 180px;
     background-color: #393939;
@@ -78,6 +79,7 @@ button{
     color: white;
     font-size: 17px;
 }
+
  /* 列表卡片名称 */
  .listName{
     cursor: pointer;
@@ -103,7 +105,7 @@ button{
     display: block;
     font-size: 18px;
 }
-.listName:hover+.closeSpan {
+.listName:hover + .closeSpan {
     display: block;
 }
 

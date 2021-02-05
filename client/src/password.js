@@ -12,11 +12,12 @@
 /**
  * @method check -简单的检查密码难度
  * @param {string} text -用户输入的密码
+ * @author Hans
  * 
  * 正则表达式
  * 少于6位数和全是数字的不行
  */
- let check = (text) => {
+ let passwordIsRight = (text) => {
     let patternBits = /^\w{6,}$/;
     let patternAllNumber = /^\d+$/;
 
@@ -35,6 +36,7 @@
  * @method compare -验证密码
  * @param {string} text -用户输入的密码
  * @param {string} user -当前用户数据
+ * @author Hans
  */
 let compare = (text,user) => {
     let testText = user.password;
@@ -47,7 +49,7 @@ let compare = (text,user) => {
 
 
 
-export { check,compare };
+export { passwordIsRight,compare };
 
 
 

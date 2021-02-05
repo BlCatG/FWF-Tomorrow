@@ -1,5 +1,11 @@
-import { check,compare } from './password.js';
+import { passwordIsRight,compare } from './password.js';
 import { popUp } from './popUp.js';
+
+
+
+//这里将要检查本地有无token，是否和服务器的token相同
+
+
 
 /**
  * @description send verification code to email -发送验证码到邮箱
@@ -14,7 +20,7 @@ $("#link-sendCode").on("click",() => {
         console.log(res.data);
     })
     .catch(err => {
-        //popUp("失败","验证码发送失败");
+        //popUp("失败","网络链接出错");
         console.error(err); 
     })
 });
@@ -37,8 +43,14 @@ $("#button-signUp").on("click", () => {
             }
         })
         .then(res => {
-            console.log(res.data);
-            localStorage.setItem("token",res.data.data.token);
+            if (res.code) {
+                //为1时表示“验证码错误”
+                console.log(res.data.msg);
+            } else {
+                console.log(res.data.msg);
+                saveToken(res.data.data.token);
+                window.open("../templete/Todo.html","_self");
+            }
         })
         .catch(err => {
             console.error(err); 
@@ -54,6 +66,7 @@ $("#button-signUp").on("click", () => {
 
 
 $("#link-signUp").on("click", () => {
+
     $(".container").css({
         "display": "none"
     });
@@ -70,3 +83,8 @@ $("#link-login").on("click", () => {
         "display" : "none"
     });
 });
+
+
+let saveToken = (token) => {
+    window.localStorage.setItem("token",token);
+}

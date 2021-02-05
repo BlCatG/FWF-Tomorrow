@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../style/Todo1.css">
+    <link rel="stylesheet" href="../style/todo.css">
+    <link rel="stylesheet" href="../style/iconfont.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js" integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ==" crossorigin="anonymous"></script>
+</head>
+<body>
+<div class="container">
+    <div class="inputPopup">
+            <input type="text" placeholder="输入任务" class="inputPopup--input" >
+            <button  class="inputPopup--submit">创建列表</button>  
+    </div>
+    <button class="but">
+            +添加列表
+    </button>
+    <div class="Newlist list1">
+        
+        <div class="Newlist--head">
+            <div class="listName">列表名字</div>
+            <div class="closeSpan closeSpan1">✖</div>
+        </div>
+        <div id="pieces" class="pieces">
+            <div class="piece">
+                <i class="iconfont click icon-todolist-choose piece--selectBox" id="piece-selectBox"></i>
+                <div class="piece--text click" id="piece-text">文字</div>
+                <div class="iconfont click icon-more piece--buttons click" id="piece-buttons"></div>
+                <div class="piece--menu" id="piece-menu">
+                    <div class="piece--button__del click" id="button-del">删除</div>
+                </div>
+            </div>
+        </div>
+    <div class="Newlist--bottom">
+        <div id="button-add" class="Newlist--button__addPiece">添加</div>
+    </div>
+    <!-- <button class="count addCard" >创建新列表</button> -->
+</div>
+<script src="../src/Todo1.js" ></script>
+<script src="../src/toDoPiece.js" type="module"></script>
+</body>
+</html>

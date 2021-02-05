@@ -8,6 +8,13 @@ let inputPiece = $("<input></input>").attr({
     "type" : "input",
     "value" : "",
     "id" : "piece-input"
+}).css({
+    "border": "0",
+    "margin": "0",
+    "height": "16px",
+    "width": "100%",
+    "font-size": "13px",
+    "place-self": "center start"
 });
 
 // let clickMenu = $(`<div class="clickMenu">
@@ -19,9 +26,9 @@ let addPiece = (() => {
     return () => {
         //这里还有操作空间
         return $(`<div class="piece">
-                    <div class="piece--selectBox click" id="piece-selectBox">O</div>
+                    <i class="iconfont click icon-todolist-choose piece--selectBox" id="piece-selectBox"></i>
                     <div class="piece--text click" id="piece-text">文字</div>
-                    <div class="piece--buttons click" id="piece-buttons">ooo</div>
+                    <div class="iconfont click icon-more piece--buttons click" id="piece-buttons"></div>
                     <div class="piece--menu" id="piece-menu">
                         <div class="piece--button__del click" id="button-del">删除</div>
                     </div>
@@ -65,6 +72,7 @@ let exitEdit = (status) => {
 
 let add = () => {
     let p = addPiece();
+    console.log($("#pieces"));
     $("#pieces").append(p);
     edit(p.find("[class='piece--text']"));
 }
@@ -84,10 +92,10 @@ $(document).keypress((e) => {
     console.log(e.keyCode);
     switch (e.keyCode)
     {
-        // case 27:
-        //     console.log("ESC确认！");
-        //     exitEdit(false);
-        //     break;
+        case 27:
+            console.log("ESC确认！");
+            exitEdit(false);
+            break;
         case 13:
             console.log("回车确认！");
             exitEdit(true);

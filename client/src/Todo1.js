@@ -34,7 +34,7 @@ document.onkeydown = function (e) { // 回车提交表单
         else if(code == 13&&popup.style.display=="none"){ //点击回车弹出添加列表输入框
             appear();
         }
-        else if(code==27&&popup.style.display=="block"){  //点击Esc键退出输入
+        else if(code == 27&&popup.style.display=="block"){  //点击Esc键退出输入
             close();
         }
     }
