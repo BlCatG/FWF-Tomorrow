@@ -17,6 +17,12 @@ let result = null;
 /**
  * 初始化弹窗对象
  */
+let containerPopupLight = $(`
+    <div class="container--popUp--light__success">
+                <div class="container--popUp--light--icon">O</div>
+                <div class="container--popUp--light--text">文本</div>
+            </div>
+`);
 let containerPopUp =  $('<div id="reminder-strong" class="reminder--strong"></div>').html(`
     <div class="container__popUp" id="container-popUp"">
         <div class="textBox__popUp__title">
@@ -33,23 +39,24 @@ let containerPopUp =  $('<div id="reminder-strong" class="reminder--strong"></di
         </div>
 
     </div>
-    `);
+`);
 
+containerPopupLight.fadeOut(0).appendTo($("body"));
 
-    containerPopUp > $(".button__confirm").on("click",() => {
-        result = true;
+containerPopUp > $(".button__confirm").on("click",() => {
+    result = true;
+});
+
+containerPopUp > $(".button__cancel").on("click",() => {
+    result = false;
+});
+
+containerPopUp.fadeOut(0).appendTo($("body"));
+
+containerPopUp > $(".button__basis").on("click", function() {
+    containerPopUp.fadeOut(300,() => {
     });
-    
-    containerPopUp > $(".button__cancel").on("click",() => {
-        result = false;
-    });
-
-    containerPopUp.fadeOut(0).appendTo($("body"));
-
-    containerPopUp > $(".button__basis").on("click", function() {
-        containerPopUp.fadeOut(300,() => {
-        });
-    });
+});
 
 /**
  * @description dynamically link css files -动态引入css文件
@@ -62,7 +69,8 @@ let linkCss = () => {
         rel: "stylesheet",
         href: "../style/popUp.css"
     }))
-}
+};
+linkCss();
 /**
  * 
  * @method popUp -弹窗
@@ -73,11 +81,17 @@ let linkCss = () => {
 
 let popUp = (title,text) => {
 
-    linkCss();
     $(".textBox__popUp__title").text(title);
     $(".textBox__popUp__text").text(text);
     containerPopUp.fadeIn(300);
     //TODO 可传入两个函数，确认时做什么，取消时做什么
 
 };
-export { popUp,result as popUpResult };
+let popUpLight = (text) => {
+    $(".container--popUp--light--text").text(text);
+    containerPopupLight.fadeIn(300);
+    setTimeout(() => {
+        containerPopupLight.fadeOut(300);
+    }, 2000);
+}
+export { popUp,popUpLight };

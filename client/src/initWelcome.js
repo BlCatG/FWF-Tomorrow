@@ -25,14 +25,20 @@ $("#link-sendCode").on("click",() => {
  */
 $("#button-signUp").on("click", () => {
     if ( $("#input-password-first").val() == $("#input-password-again").val() ) {
-        axios.post('http://60.205.230.224:8000/api/user/register',{
-            email: $("#input-email-signUp").val(),
-            password: $("#input-password-again").val(),
-            username: $("#input-username-signUp").val(),
-            captcha: $("#input-captcha").val()
+        axios({
+            method: "post",
+            url: '/user/register',
+            baseURL:'http://60.205.230.224:8000/api',
+            data: {
+                email: $("#input-email-signUp").val(),
+                password: $("#input-password-again").val(),
+                username: $("#input-username-signUp").val(),
+                captcha: $("#input-captcha").val()
+            }
         })
         .then(res => {
             console.log(res.data);
+            localStorage.setItem("token",res.data.data.token);
         })
         .catch(err => {
             console.error(err); 

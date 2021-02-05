@@ -1,5 +1,6 @@
 
 let statusEdit = false;
+let statusMenu = false;
 let backupEdit = null;
 let backupDel = null;
 
@@ -9,16 +10,22 @@ let inputPiece = $("<input></input>").attr({
     "id" : "piece-input"
 });
 
-
+// let clickMenu = $(`<div class="clickMenu">
+//                     <div class="piece--button__del click" id="button-del">删除</div>
+//                 </div>`);
 
 let addPiece = (() => {
     let counter = 0;
     return () => {
         //这里还有操作空间
-        return $(`<div name="piece">
-                    <div name="piece-text"></div>
-                    <div id="piece-buttons">123</div>
-                </div>`).attr({
+        return $(`<div class="piece">
+                    <div class="piece--selectBox click" id="piece-selectBox">O</div>
+                    <div class="piece--text click" id="piece-text">文字</div>
+                    <div class="piece--buttons click" id="piece-buttons">ooo</div>
+                    <div class="piece--menu" id="piece-menu">
+                        <div class="piece--button__del click" id="button-del">删除</div>
+                    </div>
+                </div> `).attr({
             "index" : counter++,
         });
     }
@@ -59,7 +66,7 @@ let exitEdit = (status) => {
 let add = () => {
     let p = addPiece();
     $("#pieces").append(p);
-    edit(p.find("[name='piece-text']"));
+    edit(p.find("[class='piece--text']"));
 }
 
 let del = (p) => {
@@ -92,12 +99,28 @@ $(document).keypress((e) => {
 
 $(document).on("click", function (e) {
     console.log("点击事件触发!");
+    console.log($(e.target)[0]);
+    if ($(e.target).attr("id") == "piece-buttons") {
+
+        console.log(e.pageX);
+        console.log(e.pageY);
+        $(e.target).css({
+            "display": "none"
+        });
+        $(e.target).next().css({
+            "left": e.pageX,
+            "top": e.pageY,
+            "display": "block"
+        });
+        statusMenu = true;
+        return;
+    };
     if ($(e.target).attr("id") == "button-add") {
 
         add();
         return;
     }
-    if ($(e.target).attr("name") == "piece-text") {
+    if ($(e.target).attr("id") == "piece-text") {
         if (statusEdit) {
             console.log("有piece正在修改！")
             exitEdit(true);
@@ -113,10 +136,22 @@ $(document).on("click", function (e) {
     }
     if (e.target !== inputPiece[0] && $("#piece-input")[0] !== undefined && statusEdit) {
         exitEdit(true);
-        console.log("点击其他地方!");
-        return;
-    } else {
-        console.log("不是在编辑时点击其他地方");
+        console.log("编辑时点击其他地方!");
+
+    }
+    if (statusMenu) {
+        if ($(e.target)[0] == $("#button-del")[0]) {
+            del($(e.target).parent().parent());
+            console.log("该piece已删除")
+        }
+        $("[id='piece-buttons']").css({
+            "display": "block"
+        });
+        $("[id='piece-menu']").css({
+            "display": "none"
+        });
+        console.log("点击菜单以外地方");
+        statusMenu = false;
         return;
     }
 });
@@ -124,10 +159,5 @@ $(document).on("click", function (e) {
 
 
 
-$("#button-del").on("click", (e) => {
-
-    del($(e.target));
-
-});
 
 export { edit,add,del };

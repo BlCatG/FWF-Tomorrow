@@ -25,7 +25,30 @@
                             "text text text"
                             ". button1 button2";
 }
+.container--popUp--light__success {
+    background:rgb(237,237,237);
+    border: solid rgb(142,142,142);
+    border-radius: 3px;
+    height: 50px;
+    width: 200px;
+    opacity: 0.8;
 
+    display: grid;
+    grid-template-columns: 20% 80%;
+
+    position:absolute;
+    z-index: 995;
+    top: 0;
+    left: 50%;
+    
+}
+.container--popUp--light--icon {
+    margin: auto;
+}
+.container--popUp--light--text {
+    font-size: 13px;
+    margin: auto;
+}
 .textBox__popUp__title {
     grid-area: title;
 
