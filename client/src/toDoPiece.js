@@ -101,7 +101,7 @@ $(document).on("click", function (e) {
     console.log("点击事件触发!");
     console.log($(e.target)[0]);
     if ($(e.target).attr("id") == "piece-buttons") {
-
+        console.log("点击菜单！");
         console.log(e.pageX);
         console.log(e.pageY);
         $(e.target).css({
@@ -140,7 +140,7 @@ $(document).on("click", function (e) {
 
     }
     if (statusMenu) {
-        if ($(e.target)[0] == $("#button-del")[0]) {
+        if ($(e.target).attr("id") == "button-del") {
             del($(e.target).parent().parent());
             console.log("该piece已删除")
         }
@@ -150,6 +150,8 @@ $(document).on("click", function (e) {
         $("[id='piece-menu']").css({
             "display": "none"
         });
+    }
+    else {
         console.log("点击菜单以外地方");
         statusMenu = false;
         return;
