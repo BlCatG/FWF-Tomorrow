@@ -17,10 +17,10 @@ let result = null;
 /**
  * 初始化弹窗对象
  */
-let containerPopupLight = $(`
+let containerPopupLightSuccess = $(`
     <div class="container--popUp--light__success">
-                <div class="container--popUp--light--icon">O</div>
-                <div class="container--popUp--light--text">文本</div>
+                <i class="container--popUp--light__success--icon iconfont icon-success"></i>
+                <div class="container--popUp--light__success--text">文本</div>
             </div>
 `);
 let containerPopUp =  $('<div id="reminder-strong" class="reminder--strong"></div>').html(`
@@ -41,7 +41,7 @@ let containerPopUp =  $('<div id="reminder-strong" class="reminder--strong"></di
     </div>
 `);
 
-containerPopupLight.fadeOut(0).appendTo($("body"));
+containerPopupLightSuccess.fadeOut(0).appendTo($("body"));
 
 containerPopUp > $(".button__confirm").on("click",() => {
     result = true;
@@ -87,11 +87,14 @@ let popUp = (title,text) => {
     //TODO 可传入两个函数，确认时做什么，取消时做什么
 
 };
-let popUpLight = (text) => {
-    $(".container--popUp--light--text").text(text);
-    containerPopupLight.fadeIn(300);
+let popUpLightSuccess = (text) => {
+    $(".container--popUp--light__success--text").text(text);
+    containerPopupLightSuccess.fadeIn(300);
     setTimeout(() => {
-        containerPopupLight.fadeOut(300);
+        containerPopupLightSuccess.fadeOut(300);
     }, 2000);
 }
-export { popUp,popUpLight };
+let popUpSuccess = (text) => {
+
+}
+export { popUp, popUpLightSuccess};
