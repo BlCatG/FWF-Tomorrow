@@ -24,26 +24,26 @@ window.onclick=function(event){
  * @description 点击回车弹出添加列表输入框，输入时点击回车关闭添加列表输入框。
  * @author XXQ
  */
-document.onkeydown = function (e) { // 回车提交表单
-    // 兼容FF和IE和Opera
-        var theEvent = window.event || e;
-        var code = theEvent.keyCode || theEvent.which || theEvent.charCode;
-        if (code == 13&&popup.style.display=="block") {
-            createCard();
-        }
-        else if(code == 13&&popup.style.display=="none"){ //点击回车弹出添加列表输入框
-            appear();
-        }
-        else if(code == 27&&popup.style.display=="block"){  //点击Esc键退出输入
-            close();
-        }
-    }
+// document.onkeydown = function (e) { // 回车提交表单
+//     // 兼容FF和IE和Opera
+//         var theEvent = window.event || e;
+//         var code = theEvent.keyCode || theEvent.which || theEvent.charCode;
+//         if (code == 13&&popup.style.display=="block") {
+//             createCard();
+//         }
+//         else if(code == 13&&popup.style.display=="none"){ //点击回车弹出添加列表输入框
+//             appear();
+//         }
+//         else if(code == 27&&popup.style.display=="block"){  //点击Esc键退出输入
+//             close();
+//         }
+//     }
 /**
  * @description 创建新列表
  * @author XXQ
  */
 var listSubmit=document.getElementsByClassName('inputPopup--submit')[0];
-listSubmit.addEventListener("click",createCard);
+//listSubmit.addEventListener("click",createCard);
 var i=0;
 function createCard(){
     i++;
@@ -81,4 +81,47 @@ function judge(){
             i--;
         }
     }
+}
+
+/**
+ * @description 创建新列表 备用
+ * @author Hans
+ */
+document.onkeydown = function (e) { // 回车提交表单
+// 兼容FF和IE和Opera
+    var theEvent = window.event || e;
+    var code = theEvent.keyCode || theEvent.which || theEvent.charCode;
+    if (code == 13&&popup.style.display=="block") {
+        createCardNew();
+    }
+    else if(code == 13&&popup.style.display=="none"){ //点击回车弹出添加列表输入框
+        appear();
+    }
+    else if(code == 27&&popup.style.display=="block"){  //点击Esc键退出输入
+        close();
+    }
+}
+
+listSubmit.addEventListener("click",createCardNew);
+
+function createCardNew() {
+    let listTitle = $(".inputPopup--input").val();//获取输入框的值
+    $(".inputPopup--input").val("");//清空输入框
+    $(`<div class="Newlist list${i}">
+        
+            <div class="Newlist--head">
+                <div class="listName">${listTitle}</div>
+                <div class="closeSpan closeSpan1">✖</div>
+            </div>
+            <div id="pieces" class="pieces">
+            </div>
+            <div class="Newlist--bottom">
+                <div id="button-add" class="Newlist--button__addPiece">添加</div>
+            </div>
+            
+        </div>
+    `).appendTo($(".container"));
+    console.log($(".container"));
+    i++;
+    close();
 }

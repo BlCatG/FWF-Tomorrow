@@ -18,12 +18,16 @@
     
     border-radius: 3px;
 
+
+    line-height: 20px;
+
 }
-.piece:hover {
+.selected:hover {
     background: rgb(245,245,245,0.1);
 }
 .piece--selectBox {
     place-self: center center;
+    
 }
 .piece--text {
     font-size: 13px;
@@ -32,6 +36,7 @@
 }
 .piece--buttons {
     place-self: center center;
+
 }
 
 .click:active {

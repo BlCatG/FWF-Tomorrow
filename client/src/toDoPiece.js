@@ -1,4 +1,7 @@
-
+/**
+ * @description 列表项的功能实现
+ * @author Hans
+ */
 let statusEdit = false;
 let statusMenu = false;
 let backupEdit = null;
@@ -26,13 +29,13 @@ let addPiece = (() => {
     return () => {
         //这里还有操作空间
         return $(`<div class="piece">
-                    <i class="iconfont click icon-todolist-choose piece--selectBox" id="piece-selectBox"></i>
-                    <div class="piece--text click" id="piece-text">文字</div>
-                    <div class="iconfont click icon-more piece--buttons click" id="piece-buttons"></div>
+                    <i class="iconfont click icon-todolist-choose piece--selectBox selected" id="piece-selectBox"></i>
+                    <div class="piece--text click selected" id="piece-text"></div>
+                    <i class="iconfont click icon-more piece--buttons click selected" id="piece-buttons"></i>
                     <div class="piece--menu" id="piece-menu">
                         <div class="piece--button__del click" id="button-del">删除</div>
                     </div>
-                </div> `).attr({
+                </div>`).attr({
             "index" : counter++,
         });
     }
@@ -48,33 +51,32 @@ let edit = (p) => {
     p.replaceWith(inputPiece);
     inputPiece.focus();
     statusEdit = true;
+    console.log("edit()执行完毕")
     
 }
 let exitEdit = (status) => {
-    if (inputPiece.val() !== "") {
-        if (status) {
-            console.log("已保存修改");
-            backupEdit.text(inputPiece.val()).replaceAll(inputPiece);
-            inputPiece.val("");
-            statusEdit = false;
-        } else {
-            console.log("放弃修改！");
-            backupEdit.replaceAll(inputPiece);
-            inputPiece.val("");
-            statusEdit = false;
-        }
+    
+    if (status) {
+        console.log("已保存修改");
+        backupEdit.text(inputPiece.val()).replaceAll(inputPiece);
+        inputPiece.val("");
+        statusEdit = false;
     } else {
-        inputPiece.remove();
-        console.log($("#piece-input")[0]);
+        console.log("放弃修改！");
+        backupEdit.replaceAll(inputPiece);
+        inputPiece.val("");
+        statusEdit = false;
     }
+    
     
 }
 
-let add = () => {
-    let p = addPiece();
-    console.log($("#pieces"));
-    $("#pieces").append(p);
-    edit(p.find("[class='piece--text']"));
+let add = (p) => {
+    let pieceAdd = addPiece();
+    p.append(pieceAdd);
+    console.log(pieceAdd.find(".piece--text"));
+    edit(pieceAdd.find(".piece--text"));
+    console.log("add()执行完毕");
 }
 
 let del = (p) => {
@@ -93,21 +95,45 @@ $(document).keypress((e) => {
     switch (e.keyCode)
     {
         case 27:
-            console.log("ESC确认！");
-            exitEdit(false);
-            break;
+            if (!statusEdit) {
+                console.log("ESC确认！");
+                exitEdit(false);
+                break;
+            }
         case 13:
-            console.log("回车确认！");
-            exitEdit(true);
-            break;
-        
+            if (statusEdit) {
+                console.log("回车确认编辑！");
+                exitEdit(true);
+                break;
+            }
 
     }
 });
 
 $(document).on("click", function (e) {
     console.log("点击事件触发!");
-    console.log($(e.target)[0]);
+    console.log("点击的元素是：" + $(e.target)[0]);
+    
+    
+    //确保已退出“编辑”、“弹出菜单”状态
+    if (statusMenu) {
+        if ($(e.target).attr("id") == "button-del") {
+            del($(e.target).parent().parent());
+            console.log("该piece已删除");
+        }
+        $("[id='piece-buttons']").css({
+            "display": "block"
+        });
+        $("[id='piece-menu']").css({
+            "display": "none"
+        });
+    }
+    if (e.target !== inputPiece[0] && $("#piece-input")[0] !== undefined && statusEdit) {
+        exitEdit(true);
+        console.log("编辑时点击其他地方!");
+    }
+
+
     if ($(e.target).attr("id") == "piece-buttons") {
         console.log("点击菜单！");
         console.log(e.pageX);
@@ -124,8 +150,9 @@ $(document).on("click", function (e) {
         return;
     };
     if ($(e.target).attr("id") == "button-add") {
+        console.log($(e.target).parent().parent().find("#pieces"));
 
-        add();
+        add($(e.target).parent().parent().find("#pieces"));
         return;
     }
     if ($(e.target).attr("id") == "piece-text") {
@@ -133,7 +160,6 @@ $(document).on("click", function (e) {
             console.log("有piece正在修改！")
             exitEdit(true);
             edit($(e.target));
-            //此处应该保存正在编辑的piece-text，并退出编辑
             return;
         } else {
             console.log("触发修改函数");
@@ -142,32 +168,12 @@ $(document).on("click", function (e) {
         }
         
     }
-    if (e.target !== inputPiece[0] && $("#piece-input")[0] !== undefined && statusEdit) {
-        exitEdit(true);
-        console.log("编辑时点击其他地方!");
-
-    }
-    if (statusMenu) {
-        if ($(e.target).attr("id") == "button-del") {
-            del($(e.target).parent().parent());
-            console.log("该piece已删除")
-        }
-        $("[id='piece-buttons']").css({
-            "display": "block"
-        });
-        $("[id='piece-menu']").css({
-            "display": "none"
-        });
-    }
-    else {
-        console.log("点击菜单以外地方");
-        statusMenu = false;
-        return;
-    }
+    
+    
 });
 
 
 
 
 
-export { edit,add,del };
+//export { edit,add,del };
